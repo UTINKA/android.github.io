@@ -128,7 +128,7 @@ function SetWalls(url)
 {
 	system_walls_url = url;
 	$('.mobile .display').css({
-		'background': 'url(' + url + ')',
+		'background': 'url(' + GetLocationSite() + url + ')',
 		'background-size': 'cover',
 		'background-repeat': 'no-repeat',
 		'background-position': 'top'

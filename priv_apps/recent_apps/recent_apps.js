@@ -37,7 +37,7 @@ while(load_reapp < started_apps.length)
 		reab.find('.ra_content').append('\
 		<a class="ra_block" data="' + app_name + ':' + app_title + ':' + app_state + '">\
 			<label>\
-				<img src="/priv_apps/' + app_name + '/' + app_name + '.png">\
+				<img src="' + GetLocationSite() + '/priv_apps/' + app_name + '/' + app_name + '.png">\
 				<text>' + app_title + '</text>\
 				<div class="close_app" data="' + app_name + ':' + app_title + ':' + app_state + '"><i class="material-icons">close</i></div>\
 			</label>\
