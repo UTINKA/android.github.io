@@ -61,7 +61,7 @@ function LoadMenuApps()
 		var name = data[0];
 		menu_box.append('\
 		<a data="' + app + '">\
-			<img src="/priv_apps/' + app + '/' + app + '.png">\
+			<img src="' + GetLocationSite() +'/priv_apps/' + app + '/' + app + '.png">\
 			<label>' + name + '</label>\
 		</a>');
 		count++;

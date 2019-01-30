@@ -23,12 +23,12 @@ var Showed_Apps = [
 /* load priv_apps */
 function LoadCss_pr_app(name_app)
 {
-	$('head').append('<link rel="stylesheet" href="/priv_apps/' + name_app + '/' + name_app + '.css" app_info="' + name_app + '" type="text/css" />');
+	$('head').append('<link rel="stylesheet" href="' + GetLocationSite() + '/priv_apps/' + name_app + '/' + name_app + '.css" app_info="' + name_app + '" type="text/css" />');
 }
 
 function LoadJS_pr_app(name_app)
 {
-	$('#display_app').find('#app_block_id').append('<script class="scr_'+ name_app +'" type="text/javascript" src="/priv_apps/' + name_app + '/' + name_app + '.js" app_info="' + name_app + '"></script>');
+	$('#display_app').find('#app_block_id').append('<script class="scr_'+ name_app +'" type="text/javascript" src="' + GetLocationSite() +'/priv_apps/' + name_app + '/' + name_app + '.js" app_info="' + name_app + '"></script>');
 }
 
 function ReloadJS_pr_app(name_app)
@@ -49,17 +49,17 @@ function LoadContent_rp_app(name_app, hide_show_anim = true)
 		UpdateUserControls(0, 'rgba(0, 0, 0, 0.3)');
 		setTimeout(function() 
 		{ 
-			$("#app_block_id").load('/priv_apps/'+name_app+'/'+name_app+'.html'); 
+			$("#app_block_id").load(GetLocationSite() + '/priv_apps/'+name_app+'/'+name_app+'.html'); 
 		}, 500);
 	}
 	else
 	{
-		$("#app_block_id").load('/priv_apps/'+name_app+'/'+name_app+'.html'); 
+		$("#app_block_id").load(GetLocationSite() + '/priv_apps/'+name_app+'/'+name_app+'.html'); 
 	}
 	//
 	$.ajax(
 	{
-		url: '/priv_apps/'+name_app+'/'+name_app+'.txt',
+		url: GetLocationSite() + '/priv_apps/'+name_app+'/'+name_app+'.txt',
 		dataType: 'text',
 		success: function (data) 
 		{
@@ -129,7 +129,7 @@ function LoadAllAppInfo(app_name)
 		{
 			$.ajax(
 			{
-				url: '/priv_apps/' + app_name + '/' + app_name + '.txt',
+				url: GetLocationSite() + '/priv_apps/' + app_name + '/' + app_name + '.txt',
 				dataType: 'text',
 				success: function (data) 
 				{

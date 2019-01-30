@@ -1,5 +1,6 @@
 // func's system 
 var 
+	location_site = window.location.href.substring(0, window.location.href.length-1),
 	system_walls_url = '',
 	recent_apps = [],
 	started_apps = [],
@@ -10,6 +11,11 @@ var
 	NotyfiVolume = 1,
 	AudioVolume = 1
 ;
+
+function GetLocationSite()
+{
+	return location_site;
+}
 
 /* System Audio */
 
@@ -42,6 +48,7 @@ function GetVolume(comp)
 
 function SysPlaySound(url, volume)
 {
+	var src = location_site + url;
 	var a = $('.SystemAudio')[0];
 	a.pause();
 	a.src = url;
