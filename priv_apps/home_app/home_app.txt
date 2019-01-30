@@ -1,0 +1,6 @@
+﻿({
+	"app_name":"home_app",
+	"status_bar_color":"transparent",
+	"status_bar_shadow":"1",
+	"down_user_controls_color":"rgba(0, 0, 0, 0)",
+})

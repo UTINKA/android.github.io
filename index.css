@@ -1,0 +1,451 @@
+*{
+	margin:0;
+	padding:0;
+}
+
+html{
+	font-family:Product Sans;
+}
+
+body{
+	opacity:0;
+	background-color:#eee;
+	transition:1.0s;
+}
+
+.mobile{
+	position: relative;
+	user-select: none;
+	margin: 50px auto;
+    width: 310px;
+    background: #000000;
+    height: 550px;
+	border-radius: 5px;
+	transition: 0.5s;
+}
+
+.mobile .display #display_app{
+	position: absolute;
+    top: 0;
+	width: 310px;
+    height: 510px;	
+	z-index: 0;
+	transition: 0.5s;
+}
+.mobile .display #display_app app_content{
+	width: 100%;
+    height: 100%;
+    display: block;
+	transition: 0.5s;
+}
+.mobile .display #display_app app_content up_bar_color{
+	display: block;
+    width: 100%;
+    height: 20px;
+    border-radius: 3px 3px 0 0;
+    transition: 0.5s;
+}
+.mobile .display #display_app app_content app_block{
+	opacity:0;
+    display: block;
+    width: 100%;
+    height: 490px;
+	overflow: hidden;
+	transition: 0.5s;
+}
+
+
+.mobile .display .volume_box{
+	opacity: 0;
+    display: none;
+    width: 100%;
+    height: 90px;
+    position: absolute;
+    margin-top: 0px;
+    border-radius: 3px 3px 0 0;
+    overflow: hidden;
+    z-index: 7;
+    transition: 0.5s;
+}
+.mobile .display .volume_box vbox{
+	position: relative;
+    display: block;
+    width: 310px;
+    height: 60px;
+    background: #fff;
+    margin: 0 auto;
+    box-shadow: 0 20px 20px -10px rgba(0, 0, 0, 0.5);
+}
+.mobile .display .volume_box vbox a{
+	position: relative;
+    display: block;
+    width: 30px;
+    height: 30px;
+    top: 15px;
+    left: 10px;
+    text-align: center;
+    background: #007cff;
+    color: #fff;
+    padding: 2px;
+    border-radius: 50px;
+}
+.mobile .display .volume_box vbox a i{
+	padding-top: 4px;
+    font-size: 22px;
+}
+.mobile .display .volume_box vbox barb{
+	position: absolute;
+    top: 30px;
+    left: 60px;
+    width: 230px;
+    height: 6px;
+    background: #eee;
+    border-radius: 5px;
+}
+.mobile .display .volume_box vbox barb bar{
+	position: absolute;
+    top: 0;
+    left: 0px;
+    width: 0%;
+    height: 6px;
+    background: #007cff;
+    border-radius: 5px;
+}
+.mobile .display .volume_box vbox barb bar baric{
+    position: absolute;
+    top: -4px;
+    right: -5px;
+    width: 10px;
+    height: 10px;
+    background: #ffffff;
+    border-radius: 50px;
+    border: 2px solid #007cff;
+}
+
+.mobile #display_off{
+	opacity: 1;
+	display: block;
+	width: 100%;
+    height: 100%;
+    position: absolute;
+    background: #000;
+    z-index: 9999;
+	border-radius: 3px;
+    transition: 0.5s;
+}
+
+.mobile .model{
+	position: absolute;
+    top: -15px;
+    width: 100%;
+    height: 100%;
+    margin: -4px;
+    padding: 4px;
+    padding-bottom: 19px;
+    background: rgb(210, 210, 210);
+    border-radius: 5px;
+}
+
+.mobile .model up{
+	position: absolute;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    margin: 0 auto;
+}
+.mobile .model up a{
+	position: relative;
+    display: block;
+    background: rgba(132, 132, 132, 0.25);
+    width: 40px;
+    height: 5px;
+    border-radius: 50px;
+    margin: 7px auto;
+}
+.mobile .model up span{
+	position: absolute;
+    background: #505050;
+    width: 8px;
+    height: 8px;
+    top: -2px;
+    right: -25px;
+    border-radius: 50px;
+}
+.mobile .model up label{
+	position: absolute;
+    background: #808080;
+    width: 6px;
+    height: 6px;
+    top: -1px;
+    right: -33px;
+    border-radius: 50px;
+}
+
+.mobile .model left{
+	position: absolute;
+    top: 0;
+    height: 100%;
+    left: -2px;
+}
+.mobile .model left a{
+	position: relative;
+    display: block;
+    width: 3px;
+    height: 40px;
+    border-radius: 50px 0px 0px 50px;
+    z-index: 10;
+    top: 50px;
+    margin-bottom: 5px;
+}
+
+.mobile .model right{
+	position: absolute;
+    top: 0;
+    right: -10px;
+    height: 100%;
+    width: 10px;
+}
+
+.mobile .model right a{
+	position: relative;
+    display: block;
+    width: 3px;
+    height: 40px;
+    border-radius: 0px 50px 50px 0px;
+    z-index: 10;
+    top: 50px;
+}
+.mobile .model left a, .mobile .model right a{
+	background: rgb(185, 185, 185);
+}
+
+
+
+.mobile .display{
+	opacity: 1;
+	border-radius: 3px;
+	position: relative;
+	display: block;
+    width: 100%;
+    height: 100%;
+	background-color: #313131;
+	
+	background: url(https://pp.userapi.com/c849120/v849120789/5ec41/LmRf05ja-z0.jpg);
+	background: url(https://pp.userapi.com/c834204/v834204551/19ce59/WSU1ShxypIE.jpg);
+	
+    background-size: cover;
+    background-repeat: no-repeat;
+	background-position: top;
+	transition: 0.5s;
+}
+
+/* lock_screen */
+.mobile .display .lock_screen{
+	border-radius: 3px;
+	width: 100%;
+	height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0px;
+	overflow:hidden;
+	z-index: 4;
+}
+
+.mobile .display .lock_screen center{
+	margin: 20% 0;
+    color: #ffffff;
+    height: 50px;
+	transform: scale(1);
+    transition: 0.1s;
+}
+.mobile .display .lock_screen center label{
+	display: block;
+    padding: 10px;
+    font-size: 30px;
+}
+
+.mobile .display .lock_screen down{
+    position: absolute;
+    bottom: 0px;
+    color: rgba(255, 255, 255, 1);
+}
+.mobile .display .lock_screen down a{
+	display: inline-block;
+    width: 35px;
+    height: 35px;
+    text-align: center;	
+	transition: 0.5s;
+}
+.mobile .display .lock_screen down a i{
+    margin-top: 5px;
+}
+
+.mobile .display .lock_screen .lock_notifications{
+    position: relative;
+    /*top: -154px;*/
+}
+.mobile .display .lock_screen .lock_notifications .notification{
+	transform: scale(1);
+    /* transform: scale(0.001); */
+	top: 0px;
+    position: relative;
+    background: #fff;
+    height: 50px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+	transition: 0.5s;
+}
+.mobile .display .lock_screen .lock_notifications .notification img{
+	position: absolute;
+    width: 30px;
+    padding: 10px;
+}
+.mobile .display .lock_screen .lock_notifications .notification label{
+	position: absolute;
+    top: 8px;
+    left: 60px;
+}
+.mobile .display .lock_screen .lock_notifications .notification p{
+	position: absolute;
+    top: 28px;
+    left: 60px;
+    right: 0px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 12px;
+}
+
+/* lock_screen */
+
+.mobile .up_block{
+	border-radius: 3px 3px 0 0;
+	opacity:0;
+	position: relative;
+    top: 0;
+    background: #FFFFFF;
+    width: 310px;
+    height: 0px;
+	margin: 0 auto;
+	box-shadow: 0 20px 20px -10px rgba(0, 0, 0, 0.5);
+	overflow: hidden;
+    z-index: 9;
+}
+.mobile .up_block .upb_info_block{
+	display: block;
+    padding: 10px 10px 0px 10px;
+}
+.mobile .up_block .upb_info_block left{
+	color: #646464;
+	font-size: 13px;
+    float: left;
+}
+.mobile .up_block .upb_info_block right{
+	color: #646464;
+	font-size: 13px;
+    float: right;
+}
+.mobile .up_block .upb_info_block right i{
+	font-size: 13px;
+}
+.mobile .up_block .upb_info_block right span{
+    vertical-align: top;
+}
+
+.mobile .up_block .upb_info_block containermin{
+	display: block;
+    position: relative;
+    margin-top: 25px;
+    padding-top: 5px;
+	color: rgba(0, 0, 0, 0.4);
+}
+.mobile .up_block .upb_info_block containermin a{
+	display: inline-block;
+	margin-left: 9px;
+    text-align: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50px;
+	transition: 0.5s;
+}
+.mobile .up_block .upb_info_block containermin a i{
+	margin-top: 7px;
+    font-size: 21px;
+	transition: 0.2s;
+}
+.mobile .up_block .upb_info_block containermin timeleft{
+	display: block;
+    font-size: 12px;
+    /* margin-top: 5px; */
+    margin-left: 10px;
+}
+
+
+.mobile .up{
+	border-radius: 3px 3px 0 0;
+	position: absolute;
+    top: 0;
+	width: 100%;
+    height: 20px;
+    box-shadow: inset 0px 17px 20px -15px rgba(0, 0, 0, 0.6);
+	z-index: 5;
+	transition: 0.5s;
+}
+
+.mobile .up .left{
+	display:block;
+	float: left;
+	height: 18px;
+    color: #ffffff;
+	padding-top: 1.5px;
+	padding-left: 4px;
+}
+
+.mobile .up .right{
+	display: block;
+    float: right;
+    height: 18px;
+    color: #ffffff;
+	padding-top: 1.5px;
+	padding-right: 2px;
+}
+
+.mobile .display .up span{
+	text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
+    font-size: 13px;
+}
+
+.mobile .up i{
+	text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+	font-size:15px;
+}
+
+.mobile .display .down{
+    position: absolute;
+    background: rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.8);
+    height: 40px;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+	overflow: hidden;
+	border-radius: 0 0 3px 3px;
+	transition: 0.5s;
+}
+
+.mobile .display .down a{
+	display: inline-block;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    padding: 0 9px;
+    border-radius: 50px;
+}
+.mobile .display .down a i{
+	padding: 8px;
+}
+
+.mobile .display .down a .left{
+	transform: rotateZ(90deg);
+	padding: 8px;
+}

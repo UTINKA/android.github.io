@@ -1,0 +1,426 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<title>Android</title>
+		
+		<link rel="shortcut icon" href="favicon.png">
+
+		<link rel="stylesheet" href="css/font.css" type="text/css" />
+		<link rel="stylesheet" href="css/icons.css" type="text/css" />
+		<link rel="stylesheet" href="css/ripple-effect.css" type="text/css" />
+		<link rel="stylesheet" href="index.css">
+
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+		<script type="text/javascript" src="js/html2canvas.js"></script>
+		<script type="text/javascript" src="js/global_functions.js"></script>
+		<script type="text/javascript" src="js/apps/global_functions.js"></script>
+	</head>
+	<body id="body_id">
+		<div class="mobile">
+			<div class="model">
+				<up><a/><span></span><label></label></a></up>
+				<left>
+					<a></a>
+					<a></a>
+				</left>
+				<right>
+					<a class="mm_b_power"></a>
+				</right>
+			</div>
+			<div class="Sounds" style="display:none;">
+				<audio class="SystemAudio" preload="auto" crossorigin="anonymous" style="display:none;"></audio>
+				<audio class="NotifiAudio" preload="auto" crossorigin="anonymous" style="display:none;"></audio>
+			</div>
+			<div id="display_off"></div>
+			<div class="display">
+				<!-- lock screen -->
+				<div class="lock_screen">
+					<center>
+						<label id="lock_s_time">00:00</label>
+						<span id="lock_s_date">00 0 0000</span>
+					</center>
+					<div class="lock_notifications">
+						<div class="notification" app_info_notify="0">
+							<img src="res_apps/icons_64/google_chrome.png">
+							<label>Google Chrome</label>
+							<p>
+								У вас есть 5 новых уведомлений в ВКонтакте
+							</p>
+						</div>
+					</div>
+					<down>
+						<a class="lock_screen_phone_icon" style="float:left;position:absolute;"><i class="left material-icons">phone</i></a>
+						<a class="lock_screen_lock_icon" style="margin:0 auto;width:310px;"><i class="material-icons">lock_open</i></a>
+						<a class="lock_screen_camera_icon" style="float:right;position:absolute;bottom: 0px;right: 0;"><i class="material-icons">camera_alt</i></a>
+					</down>
+				</div>
+				<!-- volume box -->
+				<div class="volume_box">
+					<vbox>
+					<a><i class="left material-icons">vibration</i></a><barb> <bar> <baric></baric> </bar> </barb>
+					</vbox>
+				</div>
+				<!-- home screen -->
+				<div class="up_block">
+					<div class="upb_info_block">
+						<left>
+							<span id="up_in_time_upb">00:00</span>
+						</left>
+						<right>
+							<i class="material-icons">network_cell</i>
+							<i class="material-icons">battery_full</i><span>100%</span>
+						</right>
+						<containermin>
+							<a class="up_in_contmin_set ripple-effect" check="false"><i class="material-icons">wifi</i></a>
+							<a class="up_in_contmin_set ripple-effect" check="false"><i class="material-icons">bluetooth</i></a>
+							<a class="up_in_contmin_set ripple-effect" check="false"><i class="material-icons">location_on</i></a>
+							<a class="up_in_contmin_set ripple-effect" check="false"><i class="material-icons">vibration</i></a>
+							<a class="up_in_contmin_set ripple-effect" check="false"><i class="material-icons">tap_and_play</i></a>
+							<a class="up_in_contmin_set ripple-effect" check="false"><i class="material-icons">stay_current_portrait</i></a>
+							<timeleft>
+								<span id="up_in_date_upb">00 0 0000</span>
+							</timeleft>
+						</containermin>
+					</div>
+				</div>
+				<div class="up" id="up_bar">
+					<div class="left">
+						<span id="up_in_time">00:00</span>
+					</div>
+					
+					<div class="right">
+						<i class="material-icons">network_cell</i>
+						<i class="material-icons">battery_full</i>
+					</div>
+				</div>
+				<!-- app -->
+				<div id="display_app" app_info="home_app">
+					<app_content>
+						<up_bar_color id="app_up_id"></up_bar_color>
+						<app_block id="app_block_id">
+							
+						</app_block>
+					</app_content>
+				</div>
+				<!-- app -->
+				<div class="down" id="user_controls">
+					<a id="back" class="ripple-effect"><i class="left material-icons">details</i></a>
+					<a id="home" class="ripple-effect"><i class="material-icons">panorama_fish_eye</i></a>
+					<a id="recent_apps" class="ripple-effect"><i class="material-icons">crop_din</i></a>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script>
+	var 
+		ShowSeconds = false, 
+		lock_screen, 
+		up_block = false, 
+		up_block_full = false
+	;
+	
+	$(document).ready(function() 
+	{
+		// Set walls
+		SetWalls('/system/walls/6.jpg');
+		// load system apps and home_app
+		LoadAllApps_sys(); // load all css and js all apps
+		LoadContent_rp_app('home_app'); // load home_app
+		// Update Timers
+		UpdateSecond();
+		UpdateOneMilisecond();
+		$('#body_id').css('opacity','1');
+	});
+	
+	$('.up').mousedown(function() { up_block = true; });
+	$('.up').mouseup(function(){ up_block = false; });
+	$('.display').mousemove(function(e) 
+	{
+		var move_Y = e.clientY-50;
+		if(up_block == true)
+		{
+			if(move_Y >= 110) move_Y = 110, up_block = false;
+			$('.up_block').css({ 'opacity':'1', 'display':'block', 'height':'' + move_Y + 'px' });
+		}
+		if(up_block_full == true)
+		{
+			if(move_Y >= 400) move_Y = 400, up_block_full = false;
+			$('.up_block').css({ 'opacity':'1', 'display':'block', 'height':'' + move_Y + 'px' });
+		}
+		if(up_block == true || up_block_full == true)
+		{
+			var opacity_a, opacity_b, countdown = 20;
+			if(move_Y < countdown)
+			{
+				if(move_Y < countdown-1) opacity_a = '0.9', opacity_b = '0.1';
+				if(move_Y < countdown-2) opacity_a = '0.8', opacity_b = '0.2';
+				if(move_Y < countdown-3) opacity_a = '0.7', opacity_b = '0.3';
+				if(move_Y < countdown-4) opacity_a = '0.6', opacity_b = '0.4';
+				if(move_Y < countdown-5) opacity_a = '0.5', opacity_b = '0.5';
+				if(move_Y < countdown-6) opacity_a = '0.4', opacity_b = '0.6';
+				if(move_Y < countdown-7) opacity_a = '0.3', opacity_b = '0.7';
+				if(move_Y < countdown-8) opacity_a = '0.2', opacity_b = '0.8';
+				if(move_Y < countdown-9) opacity_a = '0.1', opacity_b = '0.9';
+				if(move_Y < countdown-10) opacity_a = '0', opacity_b = '1';
+				$('.up_block').css('opacity',''+opacity_a+'');
+				$('.up').css('opacity',''+opacity_b+'');
+			}
+		}
+		if($('.up_block').css('height') == '0' || $('.up_block').css('height') == '0px')
+		{
+			up_block = false, up_block_full = false;  
+			$('.up_block').css({ 'opacity':'0', 'height':'0px' });
+		}
+	});
+	$('.up_block').mousedown(function() 
+	{ 
+		if($('.mobile').css('width') == '310px') up_block_full = true; 
+		else if($('.mobile').css('width') != '310px') 
+		{
+			up_block = true;
+			$('.up_block').css({'height' : '109px'});
+		}
+	}).children().mousedown(function(e) { e.stopPropagation(); });
+	$('.up_block').mouseleave(function()
+	{ 
+		if(up_block_full == true && $('.up_block').css('height') == '0px')
+		{
+			up_block = false, up_block_full = false; 
+			$('.up_block').css({ 'opacity':'0', 'height':'0px' });
+		}
+	});
+	$('.up').mouseenter(function()
+	{
+		if(up_block_full == true && up_block == true)
+		{
+			up_block = false, up_block_full = false; 
+			$('.up_block').css({ 'opacity':'0', 'height':'0px' });
+		}
+	});
+	// settings upb
+	$('.up_in_contmin_set').click(function(e)
+	{
+		var upbin = $(this);
+		if(upbin.attr('check') == 'false')
+		{
+			upbin.css({ 'background':'#007cff', 'color':'#fff' });
+			upbin.attr('check','true');
+			UPB_Set(upbin.find('i').text(), upbin.find('i'), true);
+		}
+		else if(upbin.attr('check') == 'true')
+		{
+			upbin.css({ 'background':'rgba(0,0,0,0)', 'color':'' });
+			upbin.attr('check','false');
+			UPB_Set(upbin.find('i').text(), upbin.find('i'), false);
+		}
+		SClick();
+	});
+	function UPB_Set(setting, update, state)
+	{
+		switch(setting)
+		{
+			case 'stay_current_portrait': 
+			{
+				if(state == true) 
+				{
+					$('.mobile').css({ 'width': '550px', 'height': '310px' });
+					// app
+					$('#display_app').css({ 'width': '550px', 'height': '270px' });
+					$('#app_block_id').css({ 'width': '550px', 'height': '250px' });
+					// lock screen
+					$('.lock_notifications').css('display', 'none');
+					$('.lock_screen_lock_icon').css('width', '550px');
+					//
+					update.css('transform', 'rotateZ(-90deg)');
+					$('.up_block').css('border-radius', '0px');
+					//
+					up_block = false, up_block_full = false;
+					$('.up_block').css({ 'transition':'1s', 'opacity':'0', 'height':'0px' });
+					//
+					setTimeout(function()
+					{ 
+						$('.up_block').css('transition', '0s'); 
+						$('.up').css('opacity', '1');
+					}, 500);
+				}
+				else if(state == false)
+				{
+					$('.mobile').css({ 'width': '310px', 'height': '550px' });
+					// app
+					$('#display_app').css({ 'width': '310px', 'height': '510px' });
+					$('#app_block_id').css({ 'width': '310px', 'height': '490px' });
+					// lock screen
+					$('.lock_notifications').css('display', 'block');
+					$('.lock_screen_lock_icon').css('width', '310px');
+					//
+					update.css('transform', 'rotateZ(0deg)');
+					$('.up_block').css('border-radius', '3px 3px 0 0');
+					//
+					up_block = false, up_block_full = false;
+					$('.up_block').css({ 'transition':'1s', 'opacity':'0', 'height':'0px' });
+					setTimeout(function()
+					{ 
+						$('.up_block').css('transition', '0s'); 
+						$('.up').css('opacity', '1');
+					}, 500);
+				}
+				break;
+			}
+		}
+	}
+	/* lock_screen */
+	var lock_screen_unlocked = false;
+	var mousedown_ls_lock_icon = false;
+	$('.lock_screen_lock_icon').mousedown(function()
+	{
+		if(mousedown_ls_lock_icon == false) mousedown_ls_lock_icon = true;
+	});
+	$('.lock_screen_lock_icon').mouseup(function()
+	{
+		if(mousedown_ls_lock_icon == true) mousedown_ls_lock_icon = false;
+	});
+	$('.display').mousemove(function(e)
+	{
+		var move_Y = e.clientY-40;
+		if(mousedown_ls_lock_icon == true)
+		{
+			if($('.mobile').css('width') == '310px') 
+			{
+				$('.lock_screen').css('opacity', move_Y/600);
+				$('.lock_screen center').css('transform', 'scale(' + move_Y/600 + ')');
+				$('.lock_notifications').css('opacity',  move_Y/600);
+				if(move_Y <= 310)
+				{
+					$('.lock_screen center').css('transform','scale(0)');
+					$('.lock_screen').css({ 'opacity':'0', 'height':'0px' });
+					mousedown_ls_lock_icon = false, lock_screen_unlocked = true;
+					SysPlaySound('/system/media/ui/Unlock.mp3', 1);
+				}
+				else if(move_Y >= 549) 
+				{
+					move_Y = 550, mousedown_ls_lock_icon = false;
+					$('.lock_screen center').css('transform','scale(1)');
+					$('.lock_screen').css({ 'opacity':'1', 'height':'100%' });
+				}
+			}
+			else if($('.mobile').css('width') != '310px') 
+			{
+				$('.lock_screen').css('opacity', move_Y/300);
+				$('.lock_screen center').css('transform', 'scale(' + move_Y/300 + ')');
+				if(move_Y <= 115)
+				{
+					$('.lock_screen center').css('transform', 'scale(0)');
+					$('.lock_screen').css({ 'opacity':'0', 'height':'0px' });
+					mousedown_ls_lock_icon = false, lock_screen_unlocked = true;
+					SysPlaySound('/system/media/ui/Unlock.mp3', 1);
+				}
+				else if(move_Y >= 309) 
+				{
+					move_Y = 310, mousedown_ls_lock_icon = false;
+					$('.lock_screen center').css('transform','scale(1)');
+					$('.lock_screen').css({ 'opacity':'1', 'height':'100%' });
+				}
+			}
+		}
+	});
+	/* model mobile */
+	var display_off = true;
+	$('.mm_b_power').click(function(e)
+	{
+		if(display_off == true)
+		{
+			$('#display_off').css('opacity','0');
+			lock_screen_state(true);
+			setTimeout(function() 
+			{ 
+				$('#display_off').css('display','none');
+				display_off = false; 
+			}, 200);
+		}
+		else if(display_off == false)
+		{
+			$('#display_off').css('display','block');
+			setTimeout(function() 
+			{ 
+				$('#display_off').css('opacity','1'); 
+				SysPlaySound('/system/media/ui/Lock.mp3', 1);
+				display_off = true;
+			}, 100);
+		}
+	});
+	/* lock_screen */
+	function lock_screen_state(locked)
+	{
+		if(locked == true)
+		{
+			$('.lock_screen').css({'width': '100%','display' : 'block','opacity':'1','height': '100%'});
+			$('#user_controls').css('height', '0px');
+			$('.lock_screen center').css({'transform': 'scale(1)'});
+			lock_screen = true, lock_screen_unlocked = false;
+		}
+		else if(locked == false)
+		{
+			SysPlaySound('/system/media/ui/Unlock.mp3', 1);
+			$('.lock_screen').css({'width': '100%','display' : 'none','height': '0px'});
+			$('#user_controls').css('height', '40px');
+			$('.lock_screen center').css({'transform': 'scale(1)'});
+			lock_screen = false, lock_screen_unlocked = true;
+		}
+	}
+	/* lock_screen */
+	function UpdateOneMilisecond()
+	{
+		Date_Time = new Date();
+		// up
+		if(ShowSeconds == true) $('#up_in_time').text(RealHours() + ':' + RealMinutes() + ':' + RealSeconds());
+		else if(ShowSeconds == false) $('#up_in_time').text(RealHours() + ':' + RealMinutes());
+		// upb time-date
+		if(ShowSeconds == true) $('#up_in_time_upb').text(RealHours() + ':' + RealMinutes() + ':' + RealSeconds());
+		else if(ShowSeconds == false) $('#up_in_time_upb').text(RealHours() + ':' + RealMinutes());
+		// date upb
+		$('#up_in_date_upb').text(RealDay() +' '+ RealMonthName(RealMonth(), true, false) +' '+ RealFullYear());
+		// lock_screen time-date
+		$('#lock_s_time').text(RealHours() + ':' + RealMinutes());
+		// date
+		$('#lock_s_date').text(RealDay() +' '+ RealMonthName(RealMonth(), true, false) +' '+ RealFullYear());
+		// un_locked
+		if(lock_screen_unlocked == true) 
+		{
+			$('#user_controls').css('height', '40px');
+			if($('.mobile').css('width') == '310px') 
+			{
+				$('#display_app').css('height', '510px');
+				$('#app_block_id').css({'height': '490px','border-radius':'0'});
+			}
+			else if($('.mobile').css('width') != '310px') 
+			{
+				$('#display_app').css('height', '270px');
+				$('#app_block_id').css({'height': '250px','border-radius':'0'});
+			}
+		}
+		else 
+		{
+			$('#user_controls').css('height', '0px');
+			if($('.mobile').css('width') == '310px') 
+			{
+				$('#display_app').css('height', '30px');
+				$('#app_block_id').css({'height': '530px','border-radius':'0 0 3px 3px'});
+			}
+			else if($('.mobile').css('width') != '310px') 
+			{
+				$('#display_app').css('height', '300px');
+				$('#app_block_id').css({'height': '290px','border-radius':'0 0 3px 3px'});
+			}
+		}
+		setTimeout(UpdateOneMilisecond, 1);
+	}
+	function UpdateSecond()
+	{
+		AppUpdateSecond();
+		setTimeout(UpdateSecond, 1000);
+	}
+	</script>
+	<script type="text/javascript" src="js/system_controls.js"></script>
+	<script type="text/javascript" src="js/ripple-effect.js"></script>
+</html>

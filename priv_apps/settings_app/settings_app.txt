@@ -1,0 +1,6 @@
+﻿({
+	"app_name":"Настройки",
+	"status_bar_color":"#0063cc",
+	"status_bar_shadow":"0",
+	"down_user_controls_color":"#007cff",
+})

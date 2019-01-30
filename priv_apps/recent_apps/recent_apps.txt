@@ -1,0 +1,6 @@
+﻿({
+	"app_name":"recent_apps",
+	"status_bar_color":"rgba(0, 0, 0, 0.5)",
+	"status_bar_shadow":"0",
+	"down_user_controls_color":"rgba(0, 0, 0, 0.5)",
+})
