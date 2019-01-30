@@ -4,8 +4,7 @@ var Apps_Names = [
 	"settings_app",
 	"recent_apps",
 	"dev_app",
-	"market_app",
-	"audiot_app"
+	"market_app"
 ];
 
 var Apps_Info = [];
@@ -14,8 +13,7 @@ var Apps_Info = [];
 var Showed_Apps = [
 	"settings_app",
 	"dev_app",
-	"market_app",
-	"audiot_app"
+	"market_app"
 ];
 
 

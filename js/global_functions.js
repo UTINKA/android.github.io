@@ -51,7 +51,7 @@ function SysPlaySound(url, volume)
 	var src = location_site + url;
 	var a = $('.SystemAudio')[0];
 	a.pause();
-	a.src = url;
+	a.src = src;
 	a.volume = volume;
 	a.load();
 	a.play();
@@ -66,9 +66,10 @@ function SysPlaySound(url, volume)
 
 function NotyfiPlaySound(url,volume)
 {
+	var src = location_site + url;
 	var a = $('.NotifiAudio')[0];
 	a.pause();
-	a.src = url;
+	a.src = src;
 	a.volume = volume;
 	a.load();
 	a.play();
