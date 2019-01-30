@@ -29,11 +29,6 @@ function LoadJS_pr_app(name_app)
 	$('#display_app').find('#app_block_id').append('<script class="scr_'+ name_app +'" type="text/javascript" src="' + GetLocationSite() +'/priv_apps/' + name_app + '/' + name_app + '.js" app_info="' + name_app + '"></script>');
 }
 
-function LoadGlobalJS(jsfile)
-{
-	$('#display_app').find('#app_block_id').append('<script type="text/javascript" src="' + GetLocationSite() +'/js/' + jsfile + '.js"></script>');
-}
-
 function ReloadJS_pr_app(name_app)
 {
 	$('#display_app').find('#app_block_id').find('.scr_' + name_app).remove();

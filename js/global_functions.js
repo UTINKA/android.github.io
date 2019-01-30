@@ -124,6 +124,11 @@ function UpdateUpBar(type_setting, setting)
 	}
 }
 
+function LoadGlobalJS(jsfile)
+{
+	$('#display_app').find('#app_block_id').append('<script type="text/javascript" src="' + GetLocationSite() +'/js/' + jsfile + '.js"></script>');
+}
+
 function SetWalls(url)
 {
 	system_walls_url = url;
